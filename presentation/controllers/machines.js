@@ -8,14 +8,14 @@ exports.createMachine = async (req, res, next) => {
   const machine = new Machine({
     name: req.body.name,
     description: req.body.description,
-    projects: req.body.projects,
+    //projects: req.body.projects,
     images: req.files.map(file => file.path),
   });
   console.log(req.files);
   await machine.save();
   res.status(200).json({
     message: "finally machine created w  hamdoulillah",
-    machine,
+    machine : machine,
   });
 };
 exports.getMachines = async (req, res) => {

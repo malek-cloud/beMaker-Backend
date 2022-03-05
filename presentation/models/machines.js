@@ -13,7 +13,7 @@ const machineSchema = new Schema({
   projects: {
     type: Schema.Types.ObjectId,
     ref: 'Project',
-    required: true,
+  //  required: true,
   },
   images: {
     type: [String],
