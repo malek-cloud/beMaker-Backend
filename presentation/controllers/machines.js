@@ -56,13 +56,13 @@ exports.updateMachine = async (req, res) => {
       machine.projects = req.body.projects;
     }
 
-    if (req.files!=null) {
+    if (req.files[0]) {
       machine.images = req.files.map(file => file.path);
       console.log("fama modif image " +req.files)
       console.log("hedha el body chouf faama image ou nn " +req.body.name)
 
     }
-    if(req.files==null){
+    if(!req.files[0]){
       machine.images = machine.images;
       console.log("pas de modif pour l'image " +machine.images)
     }

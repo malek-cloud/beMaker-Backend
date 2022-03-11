@@ -51,9 +51,19 @@ exports.updateProject = async (req, res) => {
       project.description = req.body.description;
     }
 
-    if (req.files) {
+    
+
+    if (req.files[0]) {
       project.images = req.files.map(file => file.path);
+
+
     }
+    if(!req.files[0]){
+      project.images = project.images;
+    }
+
+
+
 
     await project.save();
     res.status(200).json({
