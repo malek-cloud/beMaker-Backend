@@ -8,8 +8,6 @@ exports.createProject = async (req, res, next) => {
   const project = new Project({
     name: req.body.name,
     description: req.body.description,
-    realisateurs: req.body.realisateurs,
-
     images: req.files.map(file => file.path),
   });
   console.log(req.files);
@@ -24,6 +22,7 @@ exports.getProjects = async (req, res) => {
   res.status(200).json({
     message: "finally projects got w  hamdoulillah",
     projects,
+    activity : "projet"
   });
 };
 
@@ -50,9 +49,6 @@ exports.updateProject = async (req, res) => {
 
     if (req.body.description) {
       project.description = req.body.description;
-    }
-    if (req.body.realisateurs) {
-      project.realisateurs = req.body.realisateurs;
     }
 
     if (req.files) {

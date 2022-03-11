@@ -1,11 +1,6 @@
 const Field = require("../models/fields");
 exports.createField = async (req, res, next) => {
-  for (var key in req.body) {
-    if (req.body.hasOwnProperty(key)) {
-      console.log(req.body[key] + " value");
-      console.log(key + " key");
-    }
-  }
+  
   const name = req.body.name;
   const description = req.body.description;
   console.log(name + " this should be the name");
@@ -17,6 +12,7 @@ exports.createField = async (req, res, next) => {
   res.status(200).json({
     message: "finally field created w  hamdoulillah",
     field,
+    
   });
 };
 exports.getFields = async (req, res) => {
@@ -24,6 +20,7 @@ exports.getFields = async (req, res) => {
   res.status(200).json({
      message: "finally fields got w  hamdoulillah",
      fields,
+     activity : "field"
    });
 };
 

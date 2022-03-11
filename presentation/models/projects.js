@@ -10,10 +10,6 @@ const projectSchema = new Schema({
     type: String,
     required: true,
   },
-  realisateurs: {
-    type: [String],
-    required: true,
-  },
   images: {
     type: [String],
   },

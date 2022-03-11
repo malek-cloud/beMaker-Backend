@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const presentationFields = require("./presentation/routes/fields");
 const presentationMachines = require("./presentation/routes/machines");
 const presentationProjects = require("./presentation/routes/projects");
+const presentationEvents = require("./presentation/routes/événement");
 const app = express();
 const path = require("path");
 cors = require("cors");
@@ -38,6 +39,7 @@ app.use("*", cors());
 app.use("/activities", presentationFields);
 app.use("/activities", presentationProjects);
 app.use("/activities", presentationMachines);
+app.use("/activities", presentationEvents);
 
 app.use((error, req, res, next) => {
   console.log(error);

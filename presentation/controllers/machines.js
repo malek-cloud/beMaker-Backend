@@ -1,3 +1,4 @@
+const { body } = require("express-validator");
 const Machine = require("../models/machines");
 exports.createMachine = async (req, res, next) => {
   if (!req.files) {
@@ -23,6 +24,7 @@ exports.getMachines = async (req, res) => {
   res.status(200).json({
     message: "finally machines got w  hamdoulillah",
     machines,
+    activity : "machine"
   });
 };
 
@@ -54,8 +56,15 @@ exports.updateMachine = async (req, res) => {
       machine.projects = req.body.projects;
     }
 
-    if (req.files) {
+    if (req.files!=null) {
       machine.images = req.files.map(file => file.path);
+      console.log("fama modif image " +req.files)
+      console.log("hedha el body chouf faama image ou nn " +req.body.name)
+
+    }
+    if(req.files==null){
+      machine.images = machine.images;
+      console.log("pas de modif pour l'image " +machine.images)
     }
 
     await machine.save();
@@ -63,9 +72,10 @@ exports.updateMachine = async (req, res) => {
       message: "this machine is updated successfully w  hamdoulillah",
       machine,
     });
-  } catch {
+  } catch(error) {
     res.status(404);
     res.send({ error: "machine doesn't exist!" });
+    console.log(error)
   }
 };
 
