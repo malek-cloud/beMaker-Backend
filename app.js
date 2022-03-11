@@ -12,6 +12,11 @@ cors = require("cors");
 
 app.use(bodyParser.json({ extended: true })); // application/json
 app.use('/uploads', express.static(path.join('uploads')));
+
+
+
+
+
 app.use(bodyParser.urlencoded({ extended: true })); // x-www-form-urlencoded <form>
 
 const storage = multer.diskStorage({
@@ -35,6 +40,9 @@ const fileFilter = (req, file, cb) => {
 };
 app.use(multer({ storage: storage, fileFilter: fileFilter }).array("image", 6));
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+app.use(express.static(path.join('public')));
+
+
 app.use("*", cors());
 app.use("/activities", presentationFields);
 app.use("/activities", presentationProjects);
@@ -51,7 +59,7 @@ app.use((error, req, res, next) => {
 mongoose
 
   .connect(
-    "mongodb+srv://malek:newLifeNewAdventure2022@cluster0.92yzp.mongodb.net/BeMaker?retryWrites=true&w=majority",
+    `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.92yzp.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`,
     { useNewUrlParser: true, useUnifiedTopology: true }
   )
   .then((result) => {
