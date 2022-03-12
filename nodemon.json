@@ -1,0 +1,8 @@
+{
+    "env": {
+        "DB_USER": "malek",
+        "DB_NAME": "BeMaker",
+        "DB_PASSWORD": "newLifeNewAdventure2022"
+    }
+
+}
