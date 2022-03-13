@@ -6,7 +6,7 @@ exports.createEvent = async (req, res, next) => {
     throw error;
   }
 
-  const Event = new Event({
+  const event = new Event({
     name: req.body.name,
     description: req.body.description,
     type: req.body.type,
@@ -15,17 +15,17 @@ exports.createEvent = async (req, res, next) => {
     images: req.files.map((file) => file.path),
     location: req.body.location,
   });
-  await Event.save();
+  await event.save();
   res.status(200).json({
     message: "finally Event created w  hamdoulillah",
-    Event,
+    event,
   });
 };
 exports.getEvents = async (req, res) => {
-  const Events = await Event.find();
+  const events = await Event.find();
   res.status(200).json({
     message: "finally Events got w  hamdoulillah",
-    Events,
+    events,
     activity: "Event",
   });
 };
