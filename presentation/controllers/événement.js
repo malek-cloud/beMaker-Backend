@@ -65,19 +65,19 @@ exports.updateEvent = async (req, res) => {
 
     if (req.files[0]) {
       event.images = req.files.map((file) => file.path);
+      console.log("fama image");
 
     }
     if(!req.files[0]){
       event.images = event.images;
+      console.log("famech image");
+
     }
 
-
-
-
-    await Event.save();
-    res.status(200).json({
+    await event.save();
+    res.status(204).json({
       message: "this Event is updated successfully w  hamdoulillah",
-      Event,
+      event,
     });
   } catch {
     res.status(404);

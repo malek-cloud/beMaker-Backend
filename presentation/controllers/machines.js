@@ -1,5 +1,6 @@
 const { body } = require("express-validator");
 const Machine = require("../models/machines");
+const Service = require("../models/services");
 exports.createMachine = async (req, res, next) => {
   if (!req.files) {
     const error = new Error("No image provided.");
@@ -9,11 +10,17 @@ exports.createMachine = async (req, res, next) => {
   const machine = new Machine({
     name: req.body.name,
     description: req.body.description,
-    //projects: req.body.projects,
+    service : req.body.serviceId,
     images: req.files.map(file => file.path),
   });
   console.log(req.files);
   await machine.save();
+  const service = await Service.findOne({ _id:req.body.serviceId });
+  service.machines.push(machine._id);
+  await service.save();
+
+ 
+  console.log( " machine " + service.machines );
   res.status(200).json({
     message: "finally machine created w  hamdoulillah",
     machine : machine,
@@ -54,6 +61,9 @@ exports.updateMachine = async (req, res) => {
     }
     if (req.body.projects) {
       machine.projects = req.body.projects;
+    }
+    if (req.body.serviceId) {
+      machine.service = req.body.serviceId;
     }
 
     if (req.files[0]) {

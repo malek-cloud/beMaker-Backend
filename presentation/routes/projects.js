@@ -1,9 +1,6 @@
 const express = require('express');
-const { body } = require('express-validator');
 const ProjectsControllers = require('../controllers/projects');
-
 const router = express.Router();
-
 router.post(
      '/createProject',
     // body('name').trim().isLength({min :2, max : 3000}),

@@ -38,9 +38,6 @@ const formationSchema = new Schema({
   animator: {
     type: String,
   },
-  feedbacks: {
-    type: [String],
-  },
 });
 
 module.exports = mongoose.model("formation", formationSchema);

@@ -17,7 +17,7 @@ router.get(
   '/Event/:id',
   EventsControllers.getEvent
 );
-router.patch(
+router.post(
   '/editEvent/:id',
   EventsControllers.updateEvent
 );

@@ -6,15 +6,20 @@ const presentationFields = require("./presentation/routes/fields");
 const presentationMachines = require("./presentation/routes/machines");
 const presentationProjects = require("./presentation/routes/projects");
 const presentationEvents = require("./presentation/routes/événement");
+const presentationServices = require("./presentation/routes/services");
+const presentationFormations = require("./presentation/routes/formations");
+const joinWorkshop = require("./presentation/routes/workshopParticipant");
+const Client = require("./users/routes/client");
+
+
+const presentationProduct = require("./shop/routes/product");
+
 const app = express();
 const path = require("path");
 cors = require("cors");
 
 app.use(bodyParser.json({ extended: true })); // application/json
 app.use('/uploads', express.static(path.join('uploads')));
-
-
-
 
 
 app.use(bodyParser.urlencoded({ extended: true })); // x-www-form-urlencoded <form>
@@ -45,15 +50,24 @@ app.use(express.static(path.join('public')));
 
 app.use("*", cors());
 app.use((req,res,next)=>{
-  res.setHeader('Acces-Control-Allow-Origin','*');
+  res.setHeader("Access-Control-Allow-Origin", '*');
   res.setHeader('Acces-Control-Allow-Methods','GET,POST,PUT,PATCH,DELETE');
   res.setHeader('Acces-Contorl-Allow-Methods','Content-Type','Authorization');
   next(); 
 })
 app.use("/activities", presentationFields);
+app.use("/activities", presentationServices);
 app.use("/activities", presentationProjects);
 app.use("/activities", presentationMachines);
 app.use("/activities", presentationEvents);
+app.use("/activities", presentationFormations);
+app.use("/activities", joinWorkshop);
+app.use("/users", Client);
+
+
+
+app.use("/shop", presentationProduct);
+
 
 app.use((error, req, res, next) => {
   console.log(error);
@@ -69,7 +83,7 @@ mongoose
     { useNewUrlParser: true, useUnifiedTopology: true }
   )
   .then((result) => {
-    app.listen(process.env.PORT || 5000);
+    app.listen( 5000);
     console.log("connected");
   })
   .catch((err) => console.log(err));

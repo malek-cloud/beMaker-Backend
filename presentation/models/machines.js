@@ -12,8 +12,13 @@ const machineSchema = new Schema({
   },
   projects: {
     type: Schema.Types.ObjectId,
-    ref: 'Project',
-  //  required: true,
+    ref: "Project",
+    //  required: true,
+  },
+  service: {
+    type: Schema.Types.ObjectId,
+    ref: "Service",
+    //  required: true,
   },
   images: {
     type: [String],

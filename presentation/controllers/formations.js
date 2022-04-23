@@ -15,11 +15,10 @@ exports.createFormation = async (req, res, next) => {
     period: req.body.period,
     prix: req.body.prix,
     animator: req.body.animator,
-    feedbacks: req.body.feedbacks,
     images: req.files.map(file => file.path),
   });
   console.log(req.files);
-  await Formation.save();
+  await formation.save();
   res.status(200).json({
     message: "finally Formation created w  hamdoulillah",
     formation : formation,
@@ -54,18 +53,31 @@ exports.updateFormation = async (req, res) => {
     if (req.body.name) {
       formation.name = req.body.name;
     }
-
+    if (req.body.field) {
+      formation.field = req.body.field;
+    }
+    if (req.body.location) {
+      formation.location = req.body.location;
+    }
+    if (req.body.prix) {
+      formation.prix = req.body.prix;
+    }
+    if (req.body.period) {
+      formation.period = req.body.period;
+    }
+    if (req.body.date) {
+      formation.date = req.body.date;
+    }
     if (req.body.description) {
       formation.description = req.body.description;
     }
-    if (req.body.projects) {
-      formation.projects = req.body.projects;
+    if (req.body.animator) {
+      formation.animator = req.body.animator;
     }
 
     if (req.files[0]) {
       formation.images = req.files.map(file => file.path);
-      console.log("fama modif image " +req.files)
-      console.log("hedha el body chouf faama image ou nn " +req.body.name)
+      console.log("fama modif image " +req.files);
 
     }
     if(!req.files[0]){
