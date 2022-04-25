@@ -29,6 +29,7 @@ exports.getProducts = async (req, res) => {
 
 exports.getProduct = async (req, res, next) => {
   const product = await Product.findOne({ _id: req.params.id });
+  console.log(product._id.toString().length + "hedha el long mta id")
   try {
     res.status(200).json({
       message: "this product is found w  hamdoulillah",
