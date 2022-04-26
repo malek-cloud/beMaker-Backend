@@ -48,14 +48,14 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use(express.static(path.join('public')));
 
 
-/* app.use("*", cors()); */
-app.use((req,res,next)=>{
+app.use("*", cors());
+/* app.use((req,res,next)=>{
   res.setHeader("Access-Control-Allow-Origin", '*');
   res.setHeader("Access-Control-Allow-Credentials", true);
   res.setHeader('Acces-Control-Allow-Methods','GET,POST,PUT,PATCH,DELETE');
   res.setHeader('Acces-Contorl-Allow-Methods','Content-Type','Authorization');
   next(); 
-})
+}) */
 app.use("/activities", presentationFields);
 app.use("/activities", presentationServices);
 app.use("/activities", presentationProjects);
