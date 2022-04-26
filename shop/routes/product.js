@@ -11,10 +11,10 @@ router.post(
   '/Products',
   ProductsControllers.getProducts
 );
-/* router.get(
+router.get(
   '/Product/:id',
   ProductsControllers.getProduct
-); */
+);
 router.patch(
   '/editProduct/:id',
   ProductsControllers.updateProduct
