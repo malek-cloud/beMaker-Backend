@@ -31,5 +31,5 @@ router.post(
   clientController.createClient
 );
 router.post('/login', clientController.loginClient);
-router.get('/employee/:employeeId', clientController.getClient);
+router.get('/client/:id', clientController.getClient);
 module.exports = router;

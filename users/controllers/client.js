@@ -98,23 +98,21 @@ exports.loginClient = (req, res, next) => {
       next(err);
     });
 };
-exports.getClient = (req, res) => {
-  const clientId = req.params.clientId;
-  Client.findById(clientId)
-    .then((client) => {
-      if (!client) {
-        const error = new Error("could not find this client sadly");
-        error.statusCode = 404;
-        throw error;
-      }
-      res.statusCode(200).json({
-        message: "here's your client",
-        client: client,
-      });
-    })
-    .catch((err) => {
-      if (!err.statusCode) {
-        err.statusCode = 500;
-      }
+exports.getClient = async (req, res) => {
+  console.log("=helooooooo")
+ if(req.params.id){
+  const clientId = req.params.id;
+  console.log( "hedhy el id :"+  clientId)
+  const client = await Client.findById(req.params.id );
+  try {
+    res.status(200).json({
+      message: "this client is found w  hamdoulillah",
+      client,
     });
+  } catch {
+    res.status(404);
+    res.send({ error: "client doesn't exist!" });
+  }
+ }
+ 
 };

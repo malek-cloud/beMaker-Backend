@@ -42,37 +42,50 @@ exports.getProduct = async (req, res, next) => {
 };
 
 exports.updateProduct = async (req, res) => {
+  console.log("update start")
   try {
-    const product = await Product.findOne({ _id: req.params.id });
-
+    const product = await Product.findById(req.params.id );
+console.log("prod is here")
     if (req.body.name) {
       product.name = req.body.name;
+      console.log(" 1 " +  product.name + " : " +  req.body.name );
     }
     if (req.body.description) {
       product.description = req.body.description;
-    }
+      console.log(" 1 " +  product.description + " : " +  req.body.description );
+
+    }/* 
     if (req.body.category) {
       product.category = req.body.category;
-    }
+      console.log(" 1 " +  product.category + " : " +  req.body.category );
+
+    } */
     if (req.body.price) {
       product.price = req.body.price;
+      console.log(" 1 " +  product.price + " : " +  req.body.price );
+
     }
     if (req.files[0]) {
       product.images = req.files.map(file => file.path);
+      console.log(" yes" );
+
 
     }
     if(!req.files[0]){
       product.images = product.images;
+      console.log(" no" );
+
     }
 
-
-
-
     await product.save();
-    res.status(200).json({
+    console.log(" done" );
+    console.log(" prod : " + product );
+
+    res.status(204).json({
       message: "this product is updated successfully w  hamdoulillah",
       product,
     });
+    console.log("prod is saved")
   } catch {
     res.status(404);
     res.send({ error: "product doesn't exist!" });

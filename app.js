@@ -78,9 +78,17 @@ app.use((error, req, res, next) => {
   const data = error.data;
   res.status(status).json({ message: message, data: data });
 });
-mongoose
+mongoose.connect(
+  "mongodb+srv://malek:newLifeNewAdventure2022@cluster0.92yzp.mongodb.net/BeMaker?retryWrites=true&w=majority",
+  { useNewUrlParser: true, useUnifiedTopology: true }
+)
+.then((result) => {
+  app.listen(/* process.env.PORT ||  */5000);
+  console.log("connected");
+})
+.catch((err) => console.log(err));
 
-  .connect(
+/*   .connect(
     `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.92yzp.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`,
     { useNewUrlParser: true, useUnifiedTopology: true }
   )
@@ -89,3 +97,5 @@ mongoose
     console.log("connected");
   })
   .catch((err) => console.log(err));
+ */
+  
