@@ -10,6 +10,7 @@ const presentationServices = require("./presentation/routes/services");
 const presentationFormations = require("./presentation/routes/formations");
 const joinWorkshop = require("./presentation/routes/workshopParticipant");
 const Client = require("./users/routes/client");
+const Pay = require("./shop/routes/payment");
 
 
 const presentationProduct = require("./shop/routes/product");
@@ -65,6 +66,7 @@ app.use("/activities", presentationEvents);
 app.use("/activities", presentationFormations);
 app.use("/activities", joinWorkshop);
 app.use("/users", Client);
+app.use("/", Pay);
 
 
 
