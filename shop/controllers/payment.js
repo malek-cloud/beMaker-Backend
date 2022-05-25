@@ -10,8 +10,8 @@ exports.pay = async (req, res) => {
                   "app_secret": "872bce8e-574e-4a62-a950-04f1952f9bf9",
                   "accept_card":"true",
                   "amount":"100",
-                  "success_link": "http://localhost:3000/succes",
-                  "fail_link": "http://localhost:3000/fail",
+                  "success_link":  "https://maker-skills-up.herokuapp.com/succes",
+                  "fail_link": "https://maker-skills-up.herokuapp.com/fail",
                   "session_timeout_secs": 1200,
                   "developer_tracking_id": "84af679f-2494-46be-8138-90c245196292"
                 }, {
