@@ -99,6 +99,9 @@ exports.loginClient = (req, res, next) => {
     });
 };
 exports.getClient = async (req, res, next) => {
+if(!req.body.params){
+  return
+}else{
   console.log( "hedhy el id :"+  req.params.id )
   const client = await Client.findById(req.params.id );
   try {
@@ -110,4 +113,5 @@ exports.getClient = async (req, res, next) => {
     res.status(404);
     res.send({ error: "client doesn't exist!" });
   }
+}
 };
