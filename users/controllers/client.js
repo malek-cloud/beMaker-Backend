@@ -98,11 +98,8 @@ exports.loginClient = (req, res, next) => {
       next(err);
     });
 };
-exports.getClient = async (req, res) => {
-  console.log("=helooooooo")
- if(req.params.id){
-  const clientId = req.params.id;
-  console.log( "hedhy el id :"+  clientId)
+exports.getClient = async (req, res, next) => {
+  console.log( "hedhy el id :"+  req.params.id )
   const client = await Client.findById(req.params.id );
   try {
     res.status(200).json({
@@ -113,6 +110,4 @@ exports.getClient = async (req, res) => {
     res.status(404);
     res.send({ error: "client doesn't exist!" });
   }
- }
- 
 };
