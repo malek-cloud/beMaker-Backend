@@ -9,14 +9,15 @@ const presentationEvents = require("./presentation/routes/événement");
 const presentationServices = require("./presentation/routes/services");
 const presentationFormations = require("./presentation/routes/formations");
 const joinWorkshop = require("./presentation/routes/workshopParticipant");
+const joinEvent = require("./presentation/routes/eventParticipant");
 const Client = require("./users/routes/client");
 const Pay = require("./shop/routes/payment");
-
-
+const Order = require("./shop/routes/order");
 const presentationProduct = require("./shop/routes/product");
 
 const app = express();
 const path = require("path");
+const order = require("./shop/models/order");
 cors = require("cors");
 
 app.use(bodyParser.json({ extended: true })); // application/json
@@ -65,11 +66,10 @@ app.use("/activities", presentationMachines);
 app.use("/activities", presentationEvents);
 app.use("/activities", presentationFormations);
 app.use("/activities", joinWorkshop);
+app.use("/activities", joinEvent);
 app.use("/users", Client);
 app.use("/", Pay);
-
-
-
+app.use("/shop", Order);
 app.use("/shop", presentationProduct);
 
 

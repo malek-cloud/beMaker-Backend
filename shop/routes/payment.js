@@ -2,7 +2,7 @@ const express = require('express');
 const paymentController = require('../controllers/payment');
 
 const router = express.Router();
-router.get(
+router.post(
       '/pay',
       paymentController.pay
     );

@@ -7,15 +7,18 @@ const eventSchema = new Schema({
     required: true,
   },
   type: {
-      type: String,
-      required: true,
-    },
-    date: {
-      type: String,
-    },
-    location: {
-      type: String,
-    },
+    type: String,
+    required: true,
+  },
+  date: {
+    type: String,
+  },
+  currentDate: {
+    type: String,
+  },
+  location: {
+    type: String,
+  },
   description: {
     type: String,
     required: true,
@@ -24,8 +27,8 @@ const eventSchema = new Schema({
     type: [String],
   },
   animator: {
-      type: String,
-    },
+    type: String,
+  },
 });
 
 module.exports = mongoose.model("Event", eventSchema);

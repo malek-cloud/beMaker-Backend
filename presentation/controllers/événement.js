@@ -14,7 +14,9 @@ exports.createEvent = async (req, res, next) => {
     date: req.body.date,
     images: req.files.map((file) => file.path),
     location: req.body.location,
+    currentDate : new Date()
   });
+  console.log(req.body.date)
   await event.save();
   res.status(200).json({
     message: "finally Event created w  hamdoulillah",
