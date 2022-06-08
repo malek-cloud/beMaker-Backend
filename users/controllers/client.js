@@ -99,7 +99,8 @@ exports.loginClient = (req, res, next) => {
     });
 };
 exports.getClient = async (req, res, next) => {
-if(!req.body.params){
+if(!req.params.id){
+  
   return
 }else{
   console.log( "hedhy el id :"+  req.params.id )
