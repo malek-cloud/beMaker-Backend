@@ -8,13 +8,16 @@ exports.createFormation = async (req, res, next) => {
   }
   const formation = new Formation({
     name: req.body.name,
+    age: req.body.age,
+    difficulty: req.body.difficulty,
+    topics: req.body.topics,
+    projects: req.body.projects,
     description: req.body.description,
     location: req.body.location,
     field: req.body.field,
     date: req.body.date,
     period: req.body.period,
     prix: req.body.prix,
-    animator: req.body.animator,
     images: req.files.map(file => file.path),
   });
   console.log(req.files);
@@ -71,8 +74,16 @@ exports.updateFormation = async (req, res) => {
     if (req.body.description) {
       formation.description = req.body.description;
     }
-    if (req.body.animator) {
-      formation.animator = req.body.animator;
+    if (req.body.age) {
+      formation.age = req.body.age;
+    }  if (req.body.projects) {
+      formation.projects = req.body.projects;
+    }
+    if (req.body.topics) {
+      formation.topics = req.body.topics;
+    }
+    if (req.body.difficulty) {
+      formation.difficulty = req.body.difficulty;
     }
 
     if (req.files[0]) {

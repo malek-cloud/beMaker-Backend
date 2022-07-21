@@ -3,17 +3,26 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const OrderSchema = new Schema({
-    user: {
-        type: ObjectId,
-        ref: "Client",
+    nom: {
+        type: String, 
+        required : true,
+    },
+    prenom: {
+        type: String, 
+        required : true,
+    },
+    email: {
+        type: String, 
+        required : true,
+    },
+    phone: {
+        type: String, 
+        required : true,
     },
     achats: {
         type: [String],
     },
     amount: {
-        type: String,
-    },
-    paymentId: {
         type: String,
     },
     seen: {
@@ -25,11 +34,8 @@ const OrderSchema = new Schema({
         default: false,
     },
     delivered: {
-        type: Boolean,
-        default: false,
-    },
-    status: {
         type: String,
+        default: "Non",
     },
     region: {
         type: String,

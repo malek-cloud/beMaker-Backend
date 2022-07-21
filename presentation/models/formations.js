@@ -27,6 +27,22 @@ const formationSchema = new Schema({
     type: String,
     required: true,
   },
+  age: {
+    type: String,
+  },
+
+  difficulty: {
+    type: String,
+  },
+
+  topics: {
+    type: String,
+  },
+
+  projects: {
+    type: String,
+  },
+
 
   location: {
     type: String,
@@ -35,9 +51,7 @@ const formationSchema = new Schema({
   images: {
     type: [String],
   },
-  animator: {
-    type: String,
-  },
+
 });
 
 module.exports = mongoose.model("formation", formationSchema);

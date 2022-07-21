@@ -13,6 +13,7 @@ const joinEvent = require("./presentation/routes/eventParticipant");
 const Client = require("./users/routes/client");
 const Pay = require("./shop/routes/payment");
 const Order = require("./shop/routes/order");
+const Employee = require("./employee/routes/employee");
 const presentationProduct = require("./shop/routes/product");
 
 const app = express();
@@ -70,6 +71,7 @@ app.use("/activities", joinEvent);
 app.use("/users", Client);
 app.use("/", Pay);
 app.use("/shop", Order);
+app.use("/hire", Employee);
 app.use("/shop", presentationProduct);
 
 

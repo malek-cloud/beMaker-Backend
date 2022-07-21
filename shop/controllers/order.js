@@ -2,15 +2,16 @@ const Order = require("../models/order");
 exports.createOrder = async (req, res, next) => {
 console.log( req + " el user")
   const order = new Order({
-    user: req.body.userId,
+    nom: req.body.nom,
+    prenom: req.body.prenom,
+    email: req.body.email,
+    phone: req.body.phone,
     achats: req.body.achats,
     amount: req.body.amount,
-    paymentId: req.body.paymentId,
-    status: req.body.status,
     region: req.body.region,
     city: req.body.city,
     adress: req.body.adress,
-    saved : req.body.saved
+   // saved : req.body.saved
 
   });
   await order.save();
@@ -54,6 +55,10 @@ console.log("seen ? :" + req.body.seen)
     if (req.body.accepted) {
       order.accepted = req.body.accepted;
     }
+    if (req.body.delivered) {
+      order.delivered = req.body.delivered;
+    }
+
     await order.save();
     console.log(" done" );
     console.log(" order chenhy : " + order );
