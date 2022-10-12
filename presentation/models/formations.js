@@ -36,11 +36,12 @@ const formationSchema = new Schema({
   },
 
   topics: {
-    type: String,
+ type: String,
   },
 
   projects: {
     type: String,
+ 
   },
 
 
