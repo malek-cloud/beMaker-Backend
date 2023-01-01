@@ -1,4 +1,5 @@
 const { body } = require("express-validator");
+const imageDeleter = require("../../utils/deleteImages")
 const Formation = require("../models/formations");
 exports.createFormation = async (req, res, next) => {
   if (!req.files) {
@@ -20,7 +21,9 @@ exports.createFormation = async (req, res, next) => {
     prix: req.body.prix,
     images: req.files.map(file => file.path),
   });
-  console.log(req.files);
+  console.log("wolt 1");
+
+  console.log("hnee zaama " + req.files);
   await formation.save();
   res.status(200).json({
     message: "finally Formation created w  hamdoulillah",
@@ -110,8 +113,15 @@ exports.updateFormation = async (req, res) => {
 
 exports.deleteFormation = async (req, res) => {
   try {
-    await Formation.deleteOne({ _id: req.params.id });
-    res.status(200).json({
+    const formationId = req.params.id ;
+    Formation.findById(formationId).then(element =>{
+      if(!element){
+        return next(new Error('l9itch lFormation ya chayty aala rouhy w 3ali m3amal 3lia '));
+      }
+      imageDeleter.deleteFile(element.images[0])
+      return Formation.deleteOne({ _id: formationId });
+    }).catch(err=>next(err));
+     res.status(200).json({
       message: "this Formation was deleted successfully w  hamdoulillah",
     });
   } catch {
