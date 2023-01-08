@@ -14,11 +14,6 @@ const formationSchema = new Schema({
     type: String,
     required: true,
   },
-  date: {
-    type: String,
-    required: true,
-  },
-
   prix: {
     type: String,
     required: true,
@@ -35,18 +30,8 @@ const formationSchema = new Schema({
     type: String,
   },
 
-  topics: {
+  objectifs: {
  type: String,
-  },
-
-  projects: {
-    type: String,
- 
-  },
-
-
-  location: {
-    type: String,
   },
 
   images: {

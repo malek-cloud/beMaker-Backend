@@ -11,12 +11,9 @@ exports.createFormation = async (req, res, next) => {
     name: req.body.name,
     age: req.body.age,
     difficulty: req.body.difficulty,
-    topics: req.body.topics,
-    projects: req.body.projects,
+    objectifs: req.body.objectifs,
     description: req.body.description,
-    location: req.body.location,
     field: req.body.field,
-    date: req.body.date,
     period: req.body.period,
     prix: req.body.prix,
     images: req.files.map(file => file.path),
@@ -62,37 +59,30 @@ exports.updateFormation = async (req, res) => {
     if (req.body.field) {
       formation.field = req.body.field;
     }
-    if (req.body.location) {
-      formation.location = req.body.location;
-    }
+   
     if (req.body.prix) {
       formation.prix = req.body.prix;
     }
     if (req.body.period) {
       formation.period = req.body.period;
     }
-    if (req.body.date) {
-      formation.date = req.body.date;
-    }
     if (req.body.description) {
       formation.description = req.body.description;
     }
     if (req.body.age) {
       formation.age = req.body.age;
-    }  if (req.body.projects) {
-      formation.projects = req.body.projects;
-    }
-    if (req.body.topics) {
-      formation.topics = req.body.topics;
+    } 
+    if (req.body.objectifs) {
+      formation.objectifs = req.body.objectifs;
     }
     if (req.body.difficulty) {
       formation.difficulty = req.body.difficulty;
     }
 
     if (req.files[0]) {
+      imageDeleter.deleteFile(formation.images[0])
       formation.images = req.files.map(file => file.path);
       console.log("fama modif image " +req.files);
-
     }
     if(!req.files[0]){
       formation.images = formation.images;
