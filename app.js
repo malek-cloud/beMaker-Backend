@@ -23,18 +23,36 @@ cors = require("cors");
 
 app.use(bodyParser.json({ extended: true })); // application/json
 app.use('/uploads', express.static(path.join('uploads')));
+// app.use('/pdf-prog-formation', express.static(path.join('pdf-prog-formation')));
 
 
 app.use(bodyParser.urlencoded({ extended: true })); // x-www-form-urlencoded <form>
-
+// const pdfStorage = multer.diskStorage({
+//   destination : function(req, file, cb){
+//     cb(null, "./pdf-prog-formation");
+//   },
+//   filename : function(req, file, cb){
+//     cb(null, new Date().toISOString().replace(/:/g, '') + '-' +  file.originalname);
+//   }
+// });
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "./uploads");
   },
   filename: function (req, file, cb) {
-    cb(null, new Date().toISOString().replace(/:/g, '') + '-' +  file.originalname);
+    cb(null, new Date().toISOString().replace(/:/g, '')+ '-' +  file.originalname.replace(/ /g, ''));
   },
 });
+// const pdfFilter =(req, file, cb) => {
+//   if(
+//     file.mimetype==="application/pdf"
+//   ){
+//     cb(null, true);
+//   } else {
+//     console.log("hedha el type mta pdf li je " + file.mimetype)
+//     cb(null, false)
+//   }
+// };
 const fileFilter = (req, file, cb) => {
   if (
     file.mimetype === "image/png" ||
@@ -49,8 +67,6 @@ const fileFilter = (req, file, cb) => {
 app.use(multer({ storage: storage, fileFilter: fileFilter }).array("image", 6));
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use(express.static(path.join('public')));
-
-
 
 /* app.use((req,res,next)=>{
   res.setHeader("Access-Control-Allow-Origin", '*');
@@ -86,6 +102,10 @@ mongoose.connect(
   "mongodb+srv://malek:newLifeNewAdventure2022@cluster0.92yzp.mongodb.net/BeMaker?retryWrites=true&w=majority",
   { useNewUrlParser: true, useUnifiedTopology: true }
 )
+// mongoose.connect(
+//   "mongodb+srv://malek:kisstherain@cluster0.5zphpsg.mongodb.net/?retryWrites=true&w=majority",
+//   { useNewUrlParser: true, useUnifiedTopology: true }
+// )
 .then((result) => {
   app.listen(process.env.PORT || 5000);
   console.log("connected");

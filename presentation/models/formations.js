@@ -33,9 +33,15 @@ const formationSchema = new Schema({
   objectifs: {
  type: String,
   },
+  prerequis: {
+    type: String,
+     },
 
   images: {
     type: [String],
+  },
+  program: {
+    type: String,
   },
 
 });
