@@ -85,6 +85,9 @@ exports.updateFormation = async (req, res) => {
     if (req.body.difficulty) {
       formation.difficulty = req.body.difficulty;
     }
+    if (req.body.program) {
+      formation.program = req.body.program;
+    }
 
     if (req.files[0]) {
       imageDeleter.deleteFile(formation.images[0])
