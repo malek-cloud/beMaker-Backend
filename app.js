@@ -22,7 +22,8 @@ const order = require("./shop/models/order");
 cors = require("cors");
 
 app.use(bodyParser.json({ extended: true })); // application/json
-app.use('/uploads', express.static(path.join('uploads')));
+//app.use('/uploads', express.static(path.join('uploads')));
+
 // app.use('/pdf-prog-formation', express.static(path.join('pdf-prog-formation')));
 
 
