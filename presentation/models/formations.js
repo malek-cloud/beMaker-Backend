@@ -37,8 +37,16 @@ const formationSchema = new Schema({
     type: String,
      },
 
+  // images: {
+  //   type: [String],
+  // },
   images: {
-    type: [String],
+    public_id : {
+      type : String,
+    },
+    url : { 
+      type : String,
+    }
   },
   program: {
     type: String,

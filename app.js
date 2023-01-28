@@ -1,6 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const multer = require("multer");
+ const multer = require("multer");
 const mongoose = require("mongoose");
 const presentationFields = require("./presentation/routes/fields");
 const presentationMachines = require("./presentation/routes/machines");
@@ -36,6 +36,7 @@ app.use(bodyParser.urlencoded({ extended: true })); // x-www-form-urlencoded <fo
 //     cb(null, new Date().toISOString().replace(/:/g, '') + '-' +  file.originalname);
 //   }
 // });
+/////////////////////
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "./uploads");
@@ -44,6 +45,7 @@ const storage = multer.diskStorage({
     cb(null, new Date().toISOString().replace(/:/g, '')+ '-' +  file.originalname.replace(/ /g, ''));
   },
 });
+/////////////////////
 // const pdfFilter =(req, file, cb) => {
 //   if(
 //     file.mimetype==="application/pdf"
