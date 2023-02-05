@@ -18,11 +18,14 @@ exports.createFormation = async (req, res, next) => {
     prerequis: req.body.prerequis,
     difficulty: req.body.difficulty,
     objectifs: req.body.objectifs,
+    prixParGroupeOnsite : req.body.prixParGroupeOnsite,
+    prixParGroupeOnline : req.body.prixParGroupeOnline,
     description: req.body.description,
     field: req.body.field,
     period: req.body.period,
     prix: req.body.prix,
     program: req.body.program,
+    date: req.body.date,
     images : {
       public_id : cloudinaryImage.public_id,
       url : cloudinaryImage.secure_url
@@ -46,7 +49,7 @@ exports.getFormations = async (req, res) => {
 };
 
 exports.getFormation = async (req, res, next) => {
-  const formation = await Formation.findOne({ _id: req.params.id });
+  const formation = await Formation.findById(req.params.id );
   try {
     res.status(200).json({
       message: "this Formation is found w  hamdoulillah",
@@ -69,9 +72,17 @@ exports.updateFormation = async (req, res) => {
     if (req.body.field) {
       formation.field = req.body.field;
     }
-
+    if (req.body.prixParGroupeOnsite) {
+      formation.prixParGroupeOnsite = req.body.prixParGroupeOnsite;
+    }
+    if (req.body.prixParGroupeOnline) {
+      formation.prixParGroupeOnline = req.body.prixParGroupeOnline;
+    }
     if (req.body.prix) {
       formation.prix = req.body.prix;
+    }
+    if (req.body.date) {
+      formation.date = req.body.date;
     }
     if (req.body.prerequis) {
       formation.prerequis = req.body.prerequis;
@@ -108,12 +119,10 @@ exports.updateFormation = async (req, res) => {
         public_id : cloudinaryImage.public_id,
         url : cloudinaryImage.secure_url
       };
-      console.log("fama modif image " + req.files);
     }
 
     if (!req.files[0]) {
       formation.images = formation.images;
-      console.log("pas de modif pour l'image " + formation.images);
     }
     await formation.save();
     res.status(200).json({

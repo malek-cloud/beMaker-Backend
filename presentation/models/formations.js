@@ -35,7 +35,17 @@ const formationSchema = new Schema({
   },
   prerequis: {
     type: String,
-     },
+ },
+  prixParGroupeOnsite: {
+    type: String,
+ },
+  prixParGroupeOnline: {
+    type: String,
+ },
+ date: {
+  type: String,
+},
+  
 
   // images: {
   //   type: [String],
