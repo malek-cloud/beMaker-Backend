@@ -6,7 +6,6 @@ const router = express.Router();
 
 router.post(
      '/createFormation',
-    // body('name').trim().isLength({min :2, max : 3000}),
      FormationsControllers.createFormation
  );
  router.get(

@@ -3,7 +3,9 @@ const imageDeleter = require("../../utils/deleteImages");
 const Formation = require("../models/formations");
 const cloudinary = require("../../utils/cloudinary");
 exports.createFormation = async (req, res, next) => {
-  if (!req.files) {
+  console.log('Received data:', req.body);
+  try{  
+    if (!req.files) {
     const error = new Error("No image provided.");
     error.statusCode = 422;
     throw error;
@@ -26,17 +28,22 @@ exports.createFormation = async (req, res, next) => {
     prix: req.body.prix,
     program: req.body.program,
     date: req.body.date,
+    formulaireParticipation: req.body.formulaireParticipation,
     images : {
       public_id : cloudinaryImage.public_id,
       url : cloudinaryImage.secure_url
     }
-   // images: req.files.map((file) => file.path),
   });
+
   await formation.save();
   res.status(200).json({
     message: "finally Formation created w  hamdoulillah",
     formation: formation,
   });
+ }catch (error) {
+  console.error(error);
+  res.status(500).send('An error occurred while storing the data.');}
+
 };
 
 exports.getFormations = async (req, res) => {
@@ -101,6 +108,9 @@ exports.updateFormation = async (req, res) => {
     }
     if (req.body.difficulty) {
       formation.difficulty = req.body.difficulty;
+    }
+    if (req.body.formulaireParticipation) {
+      formation.formulaireParticipation = req.body.formulaireParticipation;
     }
     if (req.body.program) {
       formation.program = req.body.program;

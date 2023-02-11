@@ -4,23 +4,18 @@ const Schema = mongoose.Schema;
 const formationSchema = new Schema({
   name: {
     type: String,
-    required: true,
   },
   field: {
     type: String,
-    required: true,
   },
   description: {
     type: String,
-    required: true,
   },
   prix: {
     type: String,
-    required: true,
   },
   period: {
     type: String,
-    required: true,
   },
   age: {
     type: String,
@@ -45,11 +40,7 @@ const formationSchema = new Schema({
  date: {
   type: String,
 },
-  
 
-  // images: {
-  //   type: [String],
-  // },
   images: {
     public_id : {
       type : String,
@@ -61,7 +52,9 @@ const formationSchema = new Schema({
   program: {
     type: String,
   },
-
+  formulaireParticipation : {
+    type : String,
+  }
 });
 
 module.exports = mongoose.model("formation", formationSchema);
