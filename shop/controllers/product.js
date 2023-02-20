@@ -1,3 +1,5 @@
+const cloudinary = require("../../utils/cloudinary");
+const imageDeleter = require("../../utils/deleteImages");
 const Product = require("../models/product");
 exports.createProduct = async (req, res, next) => {
   if (!req.files) {
@@ -5,14 +7,20 @@ exports.createProduct = async (req, res, next) => {
     error.statusCode = 422;
     throw error;
   }
+  const cloudinaryImage = await cloudinary.uploader.upload(
+    req.files.map((file) => file.path)[0],
+    { folder: "imagesShop" }
+  );
   const product = new Product({
     name: req.body.name,
     price: req.body.price,
     category: req.body.category,
     description: req.body.description,
-    images: req.files.map(file => file.path),
+    images : {
+      public_id : cloudinaryImage.public_id,
+      url : cloudinaryImage.secure_url
+    }
   });
-  console.log(req.files);
   await product.save();
   res.status(200).json({
     message: "finally product created w  hamdoulillah",
@@ -66,17 +74,24 @@ console.log("prod is here")
 
     }
     if (req.files[0]) {
-      product.images = req.files.map(file => file.path);
-      console.log(" yes" );
 
-
+      if(product.images.public_id){
+        await cloudinary.uploader.destroy(product.images.public_id)
+      }
+      const cloudinaryImage = await cloudinary.uploader.upload(
+        req.files.map((file) => file.path)[0],
+        { folder: "imagesShop" }
+      );
+      product.images = {
+        public_id : cloudinaryImage.public_id,
+        url : cloudinaryImage.secure_url
+      };
     }
-    if(!req.files[0]){
+
+    if (!req.files[0]) {
       product.images = product.images;
-      console.log(" no" );
-
     }
-
+    await product.save();
     await product.save();
     console.log(" done" );
     console.log(" prod : " + product );
@@ -101,5 +116,28 @@ exports.deleteProduct = async (req, res) => {
   } catch {
     res.status(404);
     res.send({ error: "product doesn't exist!" });
+  }
+};
+exports.deleteFormation = async (req, res) => {
+  try {
+    const productId = req.params.id ;
+    product = await Product.findById(productId);
+   if(product.images){
+    await cloudinary.uploader.destroy(product.images.public_id)
+  }
+   imageDeleter.deleteFile(product.images);
+   product.findById(productId).then(element =>{
+      if(!element){
+        return next(new Error('l9itch Product ya chayty aala rouhy w 3ali m3amal 3lia '));
+      }
+      
+      return Product.deleteOne({ _id: productId });
+    }).catch(err=>next(err));
+     res.status(200).json({
+      message: "this Product was deleted successfully w  hamdoulillah",
+    });
+  } catch {
+    res.status(404);
+    res.send({ error: "Product doesn't exist!" });
   }
 };

@@ -19,7 +19,12 @@ const productSchema = new Schema({
    /*  required: true, */
   },
   images: {
-    type: [String],
+    public_id : {
+      type : String,
+    },
+    url : { 
+      type : String,
+    }
   },
 });
 
