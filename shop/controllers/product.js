@@ -15,6 +15,7 @@ exports.createProduct = async (req, res, next) => {
     name: req.body.name,
     price: req.body.price,
     category: req.body.category,
+    tags: req.body.tags,
     description: req.body.description,
     images : {
       public_id : cloudinaryImage.public_id,
@@ -56,21 +57,16 @@ exports.updateProduct = async (req, res) => {
 console.log("prod is here")
     if (req.body.name) {
       product.name = req.body.name;
-      console.log(" 1 " +  product.name + " : " +  req.body.name );
     }
     if (req.body.description) {
       product.description = req.body.description;
-      console.log(" 1 " +  product.description + " : " +  req.body.description );
 
-    }/* 
-    if (req.body.category) {
-      product.category = req.body.category;
-      console.log(" 1 " +  product.category + " : " +  req.body.category );
-
-    } */
+    }
+    if (req.body.tags) {
+      product.tags = req.body.tags;
+    }
     if (req.body.price) {
       product.price = req.body.price;
-      console.log(" 1 " +  product.price + " : " +  req.body.price );
 
     }
     if (req.files[0]) {
