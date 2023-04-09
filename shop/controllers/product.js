@@ -103,18 +103,18 @@ console.log("prod is here")
   }
 };
 
-// exports.deleteProduct = async (req, res) => {
-//   try {
-//     await Product.deleteOne({ _id: req.params.id });
-//     res.status(200).json({
-//       message: "this product was deleted successfully w  hamdoulillah",
-//     });
-//   } catch {
-//     res.status(404);
-//     res.send({ error: "product doesn't exist!" });
-//   }
-// };
 exports.deleteProduct = async (req, res) => {
+  try {
+    await Product.deleteOne({ _id: req.params.id });
+    res.status(200).json({
+      message: "this product was deleted successfully w  hamdoulillah",
+    });
+  } catch {
+    res.status(404);
+    res.send({ error: "product doesn't exist!" });
+  }
+};
+exports.deleteFormation = async (req, res) => {
   try {
     const productId = req.params.id ;
     product = await Product.findById(productId);
@@ -122,7 +122,7 @@ exports.deleteProduct = async (req, res) => {
     await cloudinary.uploader.destroy(product.images.public_id)
   }
    imageDeleter.deleteFile(product.images);
-   Product.findById(productId).then(element =>{
+   product.findById(productId).then(element =>{
       if(!element){
         return next(new Error('l9itch Product ya chayty aala rouhy w 3ali m3amal 3lia '));
       }
